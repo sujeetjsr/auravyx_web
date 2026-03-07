@@ -1,0 +1,1095 @@
+/* ============================================================
+   styles.css – DARK MIDNIGHT PURPLE THEME
+   ============================================================ */
+/* NOTE: Google Fonts loaded via non-blocking <link rel="preload"> in HTML — do NOT add @import here */
+
+
+/* ── Design Tokens ──────────────────────────────────────────── */
+:root {
+    --accent: #7c3aed;
+    /* vivid violet */
+    --accent-light: #a78bfa;
+    --accent-glow: rgba(124, 58, 237, 0.45);
+    --accent2: #06b6d4;
+    /* cyan pop */
+    --bg-dark: #0b0c1a;
+    --bg-mid: #11122a;
+    --bg-card: rgba(255, 255, 255, 0.06);
+    --glass-border: rgba(255, 255, 255, 0.10);
+    --text-white: #f1f5f9;
+    --text-muted: rgba(255, 255, 255, 0.55);
+    --success: #10b981;
+    --danger: #ef4444;
+    --font: 'Poppins', system-ui, sans-serif;
+    --radius-md: 10px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Reset & Base ────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font);
+    background: var(--bg-dark);
+    background-image:
+        radial-gradient(ellipse 80% 60% at 20% 0%, rgba(124, 58, 237, 0.18) 0%, transparent 65%),
+        radial-gradient(ellipse 60% 40% at 80% 100%, rgba(6, 182, 212, 0.12) 0%, transparent 60%),
+        linear-gradient(160deg, #0b0c1a 0%, #11122a 50%, #0b0c1a 100%);
+    color: var(--text-white);
+    line-height: 1.6;
+    overflow-x: hidden;
+    padding-bottom: 140px;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+}
+
+/* ── Scroll-Reveal ───────────────────────────────────────────── */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ── Welcome Overlay ─────────────────────────────────────────── */
+#welcome-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(11, 12, 26, 0.97);
+    z-index: 99999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transition: opacity 0.5s ease;
+}
+
+.overlay-content {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(20px);
+    padding: 40px 48px;
+    border-radius: var(--radius-xl);
+    box-shadow: 0 0 60px var(--accent-glow);
+    text-align: center;
+    transform: scale(0.85);
+    opacity: 0;
+    animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes popIn {
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.overlay-content h1 {
+    font-size: 2rem;
+    color: var(--accent-light);
+    margin-bottom: 10px;
+    font-weight: 800;
+    animation: fadeInUp 0.8s ease;
+}
+
+.overlay-content p {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+}
+
+.offer-highlight {
+    color: #f472b6;
+    font-weight: 800;
+    font-size: 1.5rem;
+    display: block;
+    margin-top: 6px;
+    text-transform: uppercase;
+    animation: textGlitch 2s infinite;
+}
+
+@keyframes textGlitch {
+
+    0%,
+    100% {
+        transform: skew(0deg);
+    }
+
+    20% {
+        transform: skew(-4deg);
+        color: #e879f9;
+    }
+
+    40% {
+        transform: skew(4deg);
+        color: #f472b6;
+    }
+}
+
+.loader {
+    margin-top: 20px;
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    border-top: 3px solid var(--accent-light);
+    border-radius: 50%;
+    animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ── Contact Bar ─────────────────────────────────────────────── */
+.contact-header {
+    background: linear-gradient(90deg, var(--accent), #9333ea);
+    color: white;
+    text-align: center;
+    padding: 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    display: block;
+    letter-spacing: 0.3px;
+}
+
+/* ── Sticky Header ───────────────────────────────────────────── */
+header {
+    background: rgba(11, 12, 26, 0.85);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    color: var(--text-white);
+    text-align: center;
+    padding: 16px 20px;
+    font-weight: 700;
+    font-size: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid var(--glass-border);
+    transition: background var(--transition);
+}
+
+/* ── Hero Section ────────────────────────────────────────────── */
+.hero {
+    text-align: center;
+    padding: 56px 20px 40px;
+    background: transparent;
+    position: relative;
+    margin-bottom: 28px;
+    animation: fadeIn 0.9s ease;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 300px;
+    background: radial-gradient(ellipse, rgba(124, 58, 237, 0.2) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.hero h1 {
+    font-size: clamp(1.9rem, 5vw, 2.9rem);
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1.2;
+    margin: 0 0 18px;
+    background: linear-gradient(135deg, #e2e8f0 0%, var(--accent-light) 50%, #06b6d4 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    /* Removed heroFloat infinite animation — keep gradientText only (lightweight) */
+    animation: gradientText 6s ease infinite;
+}
+
+@keyframes gradientText {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes heroFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
+/* ── Price Container ─────────────────────────────────────────── */
+.price-container {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(124, 58, 237, 0.15);
+    border: 1px solid rgba(124, 58, 237, 0.4);
+    padding: 10px 28px;
+    border-radius: 50px;
+    margin-bottom: 20px;
+    transition: transform var(--transition), box-shadow var(--transition);
+    box-shadow: 0 0 20px rgba(124, 58, 237, 0.15);
+}
+
+.price-container:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(124, 58, 237, 0.35);
+}
+
+.new-price {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--accent-light);
+}
+
+.discount-badge {
+    background: linear-gradient(135deg, var(--accent), #9333ea);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    animation: subtlePulse 2s infinite;
+}
+
+@keyframes subtlePulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.75;
+    }
+}
+
+/* ── Selling Points ──────────────────────────────────────────── */
+.selling-points {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 28px;
+    flex-wrap: wrap;
+}
+
+.point {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.88rem;
+    color: var(--text-white);
+    font-weight: 600;
+    cursor: default;
+    background: var(--bg-card);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(8px);
+    padding: 8px 16px;
+    border-radius: 50px;
+    transition: all var(--transition);
+    animation: fadeInUp 0.5s ease backwards;
+}
+
+.point:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.point:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.point:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.point:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.point:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+.point:hover {
+    transform: translateY(-3px) scale(1.05);
+    background: rgba(124, 58, 237, 0.2);
+    border-color: rgba(124, 58, 237, 0.5);
+    box-shadow: 0 8px 20px rgba(124, 58, 237, 0.25);
+    color: var(--accent-light);
+}
+
+.point i {
+    color: var(--accent-light);
+    font-size: 1.1rem;
+}
+
+/* ── Platform Logos ──────────────────────────────────────────── */
+.platform-logos {
+    margin: 22px 0;
+    text-align: center;
+}
+
+.logos {
+    display: flex;
+    justify-content: center;
+    gap: 22px;
+}
+
+.logos i {
+    font-size: 2.5rem;
+    filter: drop-shadow(0 4px 10px rgba(124, 58, 237, 0.4));
+    transition: transform 0.3s ease;
+    /* Removed floatIcon infinite animation — replaced by hover only */
+}
+
+.logos i:hover {
+    transform: translateY(-6px);
+}
+
+
+/* ── Gallery Grid ────────────────────────────────────────────── */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 18px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 18px;
+}
+
+/* ── Gallery Card ────────────────────────────────────────────── */
+.gallery-item-container {
+    background: var(--bg-card);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.22s cubic-bezier(0.2, 0, 0.2, 1), box-shadow 0.22s ease, border-color 0.22s ease;
+    /* NO backdrop-filter here — it forces a new compositing layer for every card (huge lag with 70+ items) */
+    will-change: transform;
+    contain: layout style;
+    opacity: 0;
+    animation: fadeSlideUp 0.4s ease forwards;
+}
+
+/* Staggered entrance */
+.gallery-item-container:nth-child(1) {
+    animation-delay: 0.05s;
+}
+
+.gallery-item-container:nth-child(2) {
+    animation-delay: 0.10s;
+}
+
+.gallery-item-container:nth-child(3) {
+    animation-delay: 0.15s;
+}
+
+.gallery-item-container:nth-child(4) {
+    animation-delay: 0.20s;
+}
+
+.gallery-item-container:nth-child(5) {
+    animation-delay: 0.25s;
+}
+
+.gallery-item-container:nth-child(6) {
+    animation-delay: 0.30s;
+}
+
+.gallery-item-container:nth-child(n+7) {
+    animation-delay: 0.35s;
+}
+
+@keyframes fadeSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.gallery-item-container:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(124, 58, 237, 0.2);
+    border-color: rgba(124, 58, 237, 0.4);
+    z-index: 10;
+}
+
+.gallery-item-container:active {
+    transform: scale(0.97);
+}
+
+.gallery-item-container img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.28s ease;
+    will-change: transform;
+}
+
+.gallery-item-container:hover img {
+    transform: scale(1.07);
+}
+
+/* ── Selected State ──────────────────────────────────────────── */
+.gallery-item-container.selected {
+    border: 2px solid var(--accent-light);
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.3), 0 12px 30px rgba(0, 0, 0, 0.3);
+}
+
+.gallery-item-container.selected::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        rgba(124, 58, 237, 0.15) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="%237c3aed"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>') no-repeat center / 50px;
+    animation: checkPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes checkPop {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* ── Badges ──────────────────────────────────────────────────── */
+.serial-badge {
+    position: absolute;
+    top: 9px;
+    right: 9px;
+    background: rgba(0, 0, 0, 0.65);
+    color: white;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    backdrop-filter: blur(6px);
+    z-index: 5;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ── View Details Overlay ────────────────────────────────────── */
+.details-overlay-link {
+    position: absolute;
+    top: 9px;
+    left: 9px;
+    background: rgba(124, 58, 237, 0.88);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    z-index: 6;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    backdrop-filter: blur(6px);
+    white-space: nowrap;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.gallery-item-container:hover .details-overlay-link {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ── Action Button ───────────────────────────────────────────── */
+.action-btn {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, var(--accent), #9333ea);
+    color: white;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(124, 58, 237, 0.45);
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+    z-index: 5;
+    white-space: nowrap;
+    overflow: hidden;
+    /* No infinite shine animation — costly when 70+ buttons have it */
+}
+
+/* Removed per-card ::after shine — was triggering a paint on every card every 3s */
+
+.action-btn:hover {
+    transform: translateX(-50%) scale(1.1);
+    box-shadow: 0 6px 20px rgba(124, 58, 237, 0.65);
+}
+
+.action-btn.remove {
+    background: linear-gradient(135deg, var(--danger), #dc2626);
+    box-shadow: 0 4px 14px rgba(239, 68, 68, 0.4);
+}
+
+.action-btn.remove:hover {
+    box-shadow: 0 6px 20px rgba(239, 68, 68, 0.6);
+}
+
+/* Removed btnFloat infinite animation from .action-btn.select — running on 70+ buttons simultaneously caused jank */
+
+
+/* ── Flying Image Animation ──────────────────────────────────── */
+.flying-img {
+    position: fixed;
+    z-index: 10000;
+    pointer-events: none;
+    transition: transform 0.6s cubic-bezier(0.2, 1, 0.3, 1), opacity 0.6s ease;
+    border-radius: 50%;
+    box-shadow: 0 5px 20px rgba(124, 58, 237, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    object-fit: cover;
+}
+
+/* ── Sticky Bar ──────────────────────────────────────────────── */
+.sticky-bar {
+    position: fixed;
+    bottom: 22px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 36px);
+    max-width: 600px;
+    background: rgba(17, 18, 42, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 14px 24px;
+    border-radius: 50px;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--glass-border);
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform var(--transition);
+}
+
+.progress-bar-container {
+    position: absolute;
+    top: 0;
+    left: 24px;
+    right: 24px;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    box-shadow: 0 0 10px var(--accent-glow);
+    transition: width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.selection-info span {
+    color: var(--accent-light);
+    font-size: 1.1rem;
+    font-weight: 800;
+}
+
+.buy-btn {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-muted);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 11px 26px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: default;
+    transition: all var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Removed infinite shine from buy-btn::after — use hover-triggered transition instead */
+.buy-btn::after {
+    display: none;
+}
+
+
+.buy-btn.active {
+    background: linear-gradient(135deg, var(--accent), #9333ea);
+    color: white;
+    cursor: pointer;
+    border-color: transparent;
+    box-shadow: 0 0 0 0 var(--accent-glow);
+    animation: btnPulse 2s infinite;
+}
+
+.buy-btn.active:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px var(--accent-glow);
+}
+
+@keyframes btnPulse {
+    0% {
+        box-shadow: 0 0 0 0 var(--accent-glow);
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgba(124, 58, 237, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(124, 58, 237, 0);
+    }
+}
+
+/* ── Lightbox ────────────────────────────────────────────────── */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(6, 7, 18, 0.96);
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.lightbox.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.lightbox img {
+    max-width: 90vw;
+    max-height: 90vh;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.08);
+    display: block;
+    object-fit: contain;
+}
+
+/* ── Social Proof Popup ──────────────────────────────────────── */
+.social-proof-popup {
+    position: fixed;
+    bottom: 120px;
+    left: 16px;
+    background: rgba(17, 18, 42, 0.95);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(14px);
+    padding: 12px 16px;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 990;
+    transform: translateX(-150%);
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    max-width: 82%;
+}
+
+.social-proof-popup.visible {
+    transform: translateX(0);
+}
+
+.social-proof-text {
+    font-size: 0.82rem;
+    line-height: 1.4;
+    color: var(--text-muted);
+}
+
+.social-proof-text span {
+    color: var(--success);
+    font-weight: 700;
+}
+
+/* ── Glass Container (Details/Payment Pages) ─────────────────── */
+.glass-container {
+    max-width: 500px;
+    margin: 36px auto;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    padding: 32px;
+    border-radius: var(--radius-xl);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 0 0 0 1px var(--glass-border);
+    border: 1px solid var(--glass-border);
+    animation: fadeInUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+    color: var(--text-white);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.glass-container::before {
+    content: '';
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 200px;
+    background: radial-gradient(ellipse, rgba(124, 58, 237, 0.15) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+/* ── Form Groups ─────────────────────────────────────────────── */
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+    opacity: 0;
+    animation: slideUpFade 0.5s ease forwards;
+}
+
+.form-group:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.form-group:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.form-group:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+@keyframes slideUpFade {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--text-white);
+    font-size: 0.9rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 13px 16px;
+    border: 1.5px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.06);
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    color: var(--text-white);
+    font-family: var(--font);
+}
+
+.form-group input::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.form-group input:focus {
+    border-color: var(--accent-light);
+    background: rgba(124, 58, 237, 0.1);
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
+    outline: none;
+    transform: translateY(-1px);
+}
+
+/* ── Order Summary ───────────────────────────────────────────── */
+.order-summary {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px dashed rgba(255, 255, 255, 0.15);
+    border-radius: var(--radius-md);
+    padding: 18px;
+    margin-bottom: 22px;
+    color: var(--text-white);
+}
+
+/* ── Amount Display ──────────────────────────────────────────── */
+.amount-display {
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--accent-light);
+    margin: 15px 0;
+    letter-spacing: -1px;
+    text-shadow: 0 2px 20px var(--accent-glow);
+    animation: pulseScale 2s infinite ease-in-out;
+}
+
+@keyframes pulseScale {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* ── QR Code ─────────────────────────────────────────────────── */
+.qr-code-container {
+    width: 240px;
+    height: 240px;
+    margin: 22px auto;
+    padding: 14px;
+    background: white;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1);
+    animation: popIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.qr-code-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* ── File Upload Zone ────────────────────────────────────────── */
+.file-upload-wrapper {
+    margin: 22px 0;
+}
+
+.custom-file-upload {
+    border: 2px dashed rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.04);
+    padding: 28px 20px;
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    display: block;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.custom-file-upload:hover,
+.custom-file-upload.drag-over {
+    border-color: var(--accent-light);
+    background: rgba(124, 58, 237, 0.12);
+    transform: translateY(-2px);
+}
+
+.custom-file-upload i {
+    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.35);
+    margin-bottom: 12px;
+    display: block;
+    transition: color 0.3s;
+}
+
+.custom-file-upload:hover i {
+    color: var(--accent-light);
+}
+
+/* ── Buttons ─────────────────────────────────────────────────── */
+.submit-btn {
+    width: 100%;
+    margin-top: 16px;
+    padding: 15px;
+    background: linear-gradient(135deg, var(--accent), #9333ea);
+    color: white;
+    border: none;
+    border-radius: var(--radius-lg);
+    font-size: 1.05rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: var(--font);
+    box-shadow: 0 6px 20px var(--accent-glow);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.submit-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+    transform: skewX(-20deg);
+    animation: shine 3s infinite;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px var(--accent-glow);
+}
+
+/* ── Success Message ─────────────────────────────────────────── */
+.success-message {
+    display: none;
+    text-align: center;
+    padding: 40px 20px;
+    animation: fadeIn 0.5s ease;
+}
+
+.success-icon {
+    font-size: 5rem;
+    color: var(--success);
+    margin-bottom: 22px;
+    animation: checkPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* ── Payment Container ───────────────────────────────────────── */
+.payment-container {
+    max-width: 500px;
+    margin: 40px auto;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--glass-border);
+    padding: 40px;
+    border-radius: var(--radius-xl);
+    text-align: center;
+    backdrop-filter: blur(14px);
+}
+
+/* ── Confetti CSS animation (replaces canvas RAF loop) ───────── */
+#confetti-canvas {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+@keyframes confettiFall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(105vh) rotate(540deg);
+        opacity: 0;
+    }
+}
+
+/* ── Footer ──────────────────────────────────────────────────── */
+footer {
+    text-align: center;
+    padding: 20px;
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    border-top: 1px solid var(--glass-border);
+    margin-top: 40px;
+}
+
+/* ── Mobile Responsiveness ───────────────────────────────────── */
+@media (max-width: 600px) {
+    .gallery {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+        padding: 0 12px !important;
+    }
+
+    .hero h1 {
+        font-size: 1.75rem;
+    }
+
+    .logos i {
+        font-size: 2rem;
+    }
+
+    .selling-points {
+        gap: 8px;
+    }
+
+    .point {
+        font-size: 0.78rem;
+        padding: 6px 12px;
+    }
+
+    .glass-container {
+        margin: 16px;
+        padding: 22px 18px;
+    }
+
+    .amount-display {
+        font-size: 2.4rem;
+    }
+
+    .sticky-bar {
+        bottom: 12px;
+    }
+}

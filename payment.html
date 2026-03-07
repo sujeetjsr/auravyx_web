@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b0c1a">
+    <title>Payment - Mega Bundle</title>
+
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
+    <!-- Google Fonts — non-blocking -->
+    <link rel="preload" as="style"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
+    </noscript>
+
+    <!-- Font Awesome — non-blocking -->
+    <link rel="preload" as="style"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    </noscript>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        Secure Checkout
+    </header>
+
+    <div class="glass-container" id="payment-box">
+        <h2 style="font-size: 1.5rem; margin-bottom: 10px; color: var(--primary-dark);">Complete Your Order</h2>
+        <p style="color: var(--text-light); font-size: 0.95rem; margin-bottom: 30px;">Scan the QR code to pay via any
+            UPI App</p>
+
+        <div class="amount-display" id="amount-text">₹0.00</div>
+
+        <div class="qr-code-container">
+            <img src="QR.jpg" alt="UPI QR Code" loading="lazy">
+        </div>
+
+        <a href="QR.jpg" download="PaymentQR.jpg" class="download-qr-btn"
+            style="text-decoration:none; display:inline-block; margin-bottom: 20px; font-weight:600; color:var(--primary-blue);">
+            <i class="fas fa-file-download"></i> Save QR Code
+        </a>
+
+        <div
+            style="text-align: left; margin-top: 30px; background: #00306e; padding: 20px; border-radius: var(--radius-md); border: 1px solid #dbeafe;">
+            <p style="font-weight: 700; margin-bottom: 10px; color: var(--primary-dark);">Verify &amp; Get Files:</p>
+            <ol style="margin: 0; padding-left: 20px; color: var(--text-main); font-size: 0.95rem; line-height: 1.6;">
+                <li>Complete payment using the QR above.</li>
+                <li>Take a screenshot of the payment success.</li>
+                <li>Upload it below to receive your files instantly via WhatsApp/Email.</li>
+            </ol>
+        </div>
+
+        <form id="payment-form">
+            <div class="file-upload-wrapper">
+                <label for="screenshot-upload" class="custom-file-upload">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <span style="font-weight:600; color:var(--text-main);">Tap to Upload Screenshot</span>
+                </label>
+                <input type="file" id="screenshot-upload" accept="image/*" required style="display:none;">
+                <div id="file-name-display"
+                    style="margin-top:10px; font-weight:600; color:var(--success-green); text-align:center;"></div>
+            </div>
+
+            <button type="submit" class="submit-btn" id="finish-btn">
+                PAYMENT DONE ✅
+            </button>
+        </form>
+    </div>
+
+    <div class="glass-container success-message" id="success-box">
+        <div class="success-icon"><i class="fas fa-check-circle"></i></div>
+        <h2 style="color:var(--primary-dark); margin-bottom:15px;">Order Received! 🎉</h2>
+        <p style="color:var(--text-main); font-size:1.1rem; margin-bottom:10px;">Thank you <span id="user-name-display"
+                style="font-weight:700; color:var(--primary-blue);"></span>!</p>
+        <p style="color:var(--text-light); margin-bottom:20px;">We have received your details and payment screenshot.
+        </p>
+        <p style="font-weight: 600; color:var(--success-green); margin-bottom:30px;">We will verify and send your
+            bundles shortly on your provided WhatsApp number &amp; Email.</p>
+
+        <a href="index.html" class="action-btn"
+            style="position:relative; left:auto; transform:none; display:inline-block; bottom:auto;">
+            Back to Home
+        </a>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Video Bundle Shop. All rights reserved.</p>
+    </footer>
+
+    <script src="payment.js" defer></script>
+
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js');
+            });
+        }
+    </script>
+</body>
+
+</html>

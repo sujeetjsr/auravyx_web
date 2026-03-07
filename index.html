@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b0c1a">
+    <title>Mega Offer - 20+ Video Bundle</title>
+
+    <!-- Preconnect to speed up 3rd-party origins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
+    <!-- Google Fonts — non-blocking (media trick) -->
+    <link rel="preload" as="style"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
+    </noscript>
+
+    <!-- Font Awesome — non-blocking -->
+    <link rel="preload" as="style"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    </noscript>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- Welcome Overlay -->
+    <div id="welcome-overlay">
+        <div class="overlay-content">
+            <h1>🎉 CONGRATULATIONS! 🎉</h1>
+            <p>You Unlocked the <br><span class="offer-highlight">10 Rs / Bundle OFFER!</span></p>
+            <div class="loader"></div>
+        </div>
+    </div>
+    <script>
+        // Show overlay only ONCE per browser session
+        const overlay = document.getElementById('welcome-overlay');
+        if (sessionStorage.getItem('overlay_shown')) {
+            // Already seen — remove immediately, no flash
+            overlay && overlay.remove();
+        } else {
+            // First visit — show then hide, mark as seen
+            sessionStorage.setItem('overlay_shown', '1');
+            setTimeout(() => {
+                if (overlay) {
+                    overlay.style.transition = "opacity 0.5s ease";
+                    overlay.style.opacity = "0";
+                    overlay.style.pointerEvents = "none";
+                    setTimeout(() => overlay.remove(), 500);
+                }
+            }, 1500);
+        }
+    </script>
+
+    <header>
+        VideoMarket - Digital Asset Store
+    </header>
+
+    <!-- Contact Info -->
+    <a href="https://wa.me/919826397716" class="contact-header">
+        Verified Seller • Support Available on WhatsApp
+    </a>
+
+    <div class="hero">
+        <h1>Latest Fresh Video Bundles</h1>
+        <p>All Viral Videos Bundle Available</p>
+
+        <div class="price-container">
+            <span class="old-price">₹199</span>
+            <span class="new-price">₹10 / Bundle</span>
+            <span class="discount-badge">Winter Sale</span>
+        </div>
+
+        <div class="selling-points">
+            <div class="point"><i class="fas fa-ban"></i> <strong>NO Copyright</strong></div>
+            <div class="point"><i class="fas fa-tint-slash"></i> <strong>NO Watermarks</strong></div>
+            <div class="point"><i class="fas fa-money-bill-wave"></i> <strong>Earn Easily</strong></div>
+            <div class="point"><i class="fas fa-rocket"></i> Get <strong>Monetized in 15 Days</strong></div>
+        </div>
+
+        <div class="platform-logos">
+            <p style="margin-bottom: 10px; font-weight: 600; color: #666;">100% OPTIMIZED FOR:</p>
+            <div class="logos">
+                <i class="fab fa-youtube" style="color: #FF0000;"></i>
+                <i class="fab fa-instagram" style="color: #E1306C;"></i>
+                <i class="fab fa-facebook" style="color: #1877F2;"></i>
+            </div>
+        </div>
+
+        <div class="instruction-box">
+            Select 5 or more bundles to proceed to checkout
+        </div>
+    </div>
+
+    <div class="gallery">
+        <!-- Images will be injected here by script.js -->
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Video Bundle Shop. All rights reserved.</p>
+    </footer>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox">
+        <img id="lightbox-img" src="" alt="Full view">
+    </div>
+
+    <!-- Sticky App Bar -->
+    <div class="sticky-bar">
+        <div class="progress-bar-container">
+            <div id="progress-fill" class="progress-fill"></div>
+        </div>
+        <div class="selection-info">
+            Selected: <span id="count">0</span> (Min 5)
+        </div>
+        <button id="buy-btn" class="buy-btn" onclick="buyNow()">
+            SELECT AT LEAST 5 TO BUY
+        </button>
+    </div>
+
+    <script src="script.js" defer></script>
+
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js');
+            });
+        }
+    </script>
+</body>
+
+</html>
