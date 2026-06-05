@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PC Games Price List</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Exo+2:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0c14;
+    --surface: #111827;
+    --card: #1a2236;
+    --border: #1e3a5f;
+    --accent: #00d4ff;
+    --accent2: #ff6b35;
+    --gold: #ffd700;
+    --green: #00e676;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --header-bg: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Exo 2', sans-serif;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--header-bg);
+    padding: 28px 20px 24px;
+    text-align: center;
+    border-bottom: 2px solid var(--accent);
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2300d4ff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.4;
+  }
+  .shop-name {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--accent);
+    text-shadow: 0 0 20px rgba(0,212,255,0.5);
+    letter-spacing: 2px;
+    position: relative;
+  }
+  .shop-tagline {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-top: 4px;
+    letter-spacing: 1px;
+    position: relative;
+  }
+  .contact-bar {
+    margin-top: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    position: relative;
+  }
+  .contact-chip {
+    background: rgba(0,212,255,0.12);
+    border: 1px solid rgba(0,212,255,0.3);
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 0.78rem;
+    color: var(--accent);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── PRICE LEGEND ── */
+  .legend {
+    background: var(--surface);
+    padding: 14px 16px;
+    margin: 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .legend-title {
+    font-size: 0.7rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  .legend-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+  }
+  .legend-item {
+    text-align: center;
+    background: var(--card);
+    border-radius: 8px;
+    padding: 7px 4px;
+    border: 1px solid var(--border);
+  }
+  .legend-price { font-size: 0.82rem; font-weight: 700; font-family: 'Rajdhani', sans-serif; }
+  .legend-label { font-size: 0.62rem; color: var(--muted); margin-top: 2px; }
+  .p49 { color: #94a3b8; }
+  .p99 { color: #60a5fa; }
+  .p149 { color: #34d399; }
+  .p169 { color: #a78bfa; }
+  .p199 { color: var(--accent2); }
+  .p249 { color: var(--gold); }
+  .p299 { color: #f87171; }
+
+  /* ── MAIN CONTENT ── */
+  .content { padding: 16px 14px 30px; max-width: 680px; margin: 0 auto; }
+
+  /* ── CATEGORY SECTION ── */
+  .category {
+    margin-bottom: 20px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+  }
+  .cat-header {
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+  }
+  .cat-icon { font-size: 1.2rem; }
+  .cat-count {
+    margin-left: auto;
+    font-size: 0.7rem;
+    background: rgba(0,212,255,0.15);
+    color: var(--accent);
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 600;
+  }
+
+  /* ── GAME ROW ── */
+  .game-list { background: var(--surface); }
+  .game-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 9px 16px;
+    border-bottom: 1px solid rgba(30, 58, 95, 0.5);
+    transition: background 0.15s;
+  }
+  .game-row:last-child { border-bottom: none; }
+  .game-row:hover { background: rgba(0,212,255,0.04); }
+
+  .game-num {
+    font-size: 0.6rem;
+    color: #475569;
+    min-width: 22px;
+    font-weight: 600;
+  }
+  .game-name {
+    flex: 1;
+    font-size: 0.82rem;
+    font-weight: 500;
+    line-height: 1.3;
+    color: var(--text);
+    padding-right: 10px;
+  }
+  .game-name .edition {
+    display: block;
+    font-size: 0.7rem;
+    color: var(--muted);
+    font-weight: 400;
+    margin-top: 1px;
+  }
+  .game-badge {
+    font-size: 0.58rem;
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-weight: 700;
+    margin-left: 5px;
+    vertical-align: middle;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  .badge-new { background: rgba(0,230,118,0.15); color: var(--green); border: 1px solid rgba(0,230,118,0.3); }
+  .badge-hot { background: rgba(255,107,53,0.15); color: var(--accent2); border: 1px solid rgba(255,107,53,0.3); }
+  .badge-top { background: rgba(255,215,0,0.15); color: var(--gold); border: 1px solid rgba(255,215,0,0.3); }
+
+  .price-tag {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    min-width: 42px;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--surface);
+    border-top: 2px solid var(--accent);
+    padding: 20px 16px;
+    text-align: center;
+    margin-top: 20px;
+  }
+  .footer-note {
+    font-size: 0.75rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+  .footer-note strong { color: var(--accent); }
+  .order-cta {
+    background: linear-gradient(135deg, var(--accent), #0094cc);
+    color: #000;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 10px 28px;
+    border-radius: 25px;
+    letter-spacing: 1px;
+    display: inline-block;
+    margin-top: 4px;
+    text-transform: uppercase;
+  }
+
+  /* ── TOTAL BANNER ── */
+  .total-banner {
+    background: linear-gradient(135deg, #0f2027, #203a43);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 16px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .total-banner .big { font-family: 'Rajdhani', sans-serif; font-size: 1.5rem; color: var(--accent); font-weight: 700; }
+  .total-banner .sub { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="shop-name">🎮 PC GAMES STORE</div>
+  <div class="shop-tagline">Cheapest PC Games • All Titles Available • Instant Delivery</div>
+  <div class="contact-bar">
+    <span class="contact-chip">📲 WhatsApp to Order</span>
+    <span class="contact-chip">⚡ Instant Delivery</span>
+    <span class="contact-chip">✅ 100% Working</span>
+  </div>
+</div>
+
+<!-- PRICE LEGEND -->
+<div class="legend">
+  <div class="legend-title">💰 Price Tiers</div>
+  <div class="legend-grid">
+    <div class="legend-item"><div class="legend-price p49">₹49</div><div class="legend-label">Budget</div></div>
+    <div class="legend-item"><div class="legend-price p99">₹99</div><div class="legend-label">Classic AAA</div></div>
+    <div class="legend-item"><div class="legend-price p149">₹149</div><div class="legend-label">Standard</div></div>
+    <div class="legend-item"><div class="legend-price p169">₹169</div><div class="legend-label">Mid-Tier</div></div>
+    <div class="legend-item"><div class="legend-price p199">₹199</div><div class="legend-label">AAA Title</div></div>
+    <div class="legend-item"><div class="legend-price p249">₹249</div><div class="legend-label">Premium</div></div>
+    <div class="legend-item"><div class="legend-price p299">₹299</div><div class="legend-label">Ultimate</div></div>
+    <div class="legend-item"><div class="legend-price" style="color:#e2e8f0">220+</div><div class="legend-label">Games Listed</div></div>
+  </div>
+</div>
+
+<div class="content">
+
+<div class="total-banner">
+  <div class="big">220+ PC GAMES LISTED</div>
+  <div class="sub">All genres • All platforms • Updated June 2025</div>
+</div>
+
+<!-- ══════════════ ACTION / OPEN WORLD ══════════════ -->
+<div class="category">
+  <div class="cat-header" style="color:#60a5fa">
+    <span class="cat-icon">🌍</span> Action / Open World
+    <span class="cat-count">33 Games</span>
+  </div>
+  <div class="game-list">
+    <div class="game-row"><span class="game-num">1</span><span class="game-name">GTA V <span class="game-badge badge-hot">HOT</span></span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">2</span><span class="game-name">GTA San Andreas <span class="edition">Definitive Edition</span></span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">3</span><span class="game-name">GTA IV <span class="edition">Complete Edition</span></span><span class="price-tag p49">₹49</span></div>
+    <div class="game-row"><span class="game-num">4</span><span class="game-name">Red Dead Redemption 2</span><span class="price-tag p199">₹199</span></div>
+    <div class="game-row"><span class="game-num">5</span><span class="game-name">Red Dead Redemption 2 <span class="edition">Ultimate Edition</span></span><span class="price-tag p299">₹299</span></div>
+    <div class="game-row"><span class="game-num">6</span><span class="game-name">Cyberpunk 2077 <span class="game-badge badge-hot">HOT</span></span><span class="price-tag p199">₹199</span></div>
+    <div class="game-row"><span class="game-num">7</span><span class="game-name">Cyberpunk 2077 + Phantom Liberty <span class="edition">Bundle</span></span><span class="price-tag p249">₹249</span></div>
+    <div class="game-row"><span class="game-num">8</span><span class="game-name">Hogwarts Legacy</span><span class="price-tag p199">₹199</span></div>
+    <div class="game-row"><span class="game-num">9</span><span class="game-name">Hogwarts Legacy <span class="edition">Deluxe Edition</span></span><span class="price-tag p249">₹249</span></div>
+    <div class="game-row"><span class="game-num">10</span><span class="game-name">Ghost of Tsushima <span class="edition">Director's Cut</span></span><span class="price-tag p249">₹249</span></div>
+    <div class="game-row"><span class="game-num">11</span><span class="game-name">Mafia Definitive Edition</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">12</span><span class="game-name">Mafia II Definitive Edition</span><span class="price-tag p49">₹49</span></div>
+    <div class="game-row"><span class="game-num">13</span><span class="game-name">Mafia III Definitive Edition</span><span class="price-tag p49">₹49</span></div>
+    <div class="game-row"><span class="game-num">14</span><span class="game-name">Sleeping Dogs Definitive Edition</span><span class="price-tag p49">₹49</span></div>
+    <div class="game-row"><span class="game-num">15</span><span class="game-name">Watch Dogs Legion</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">16</span><span class="game-name">Watch Dogs 2</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">17</span><span class="game-name">Far Cry 6</span><span class="price-tag p169">₹169</span></div>
+    <div class="game-row"><span class="game-num">18</span><span class="game-name">Far Cry 5</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">19</span><span class="game-name">Far Cry New Dawn</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">20</span><span class="game-name">Far Cry 4</span><span class="price-tag p49">₹49</span></div>
+    <div class="game-row"><span class="game-num">21</span><span class="game-name">Just Cause 4 Complete Edition</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">22</span><span class="game-name">Just Cause 3 XXL Edition</span><span class="price-tag p49">₹49</span></div>
+    <div class="game-row"><span class="game-num">23</span><span class="game-name">Ghost Recon Breakpoint</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">24</span><span class="game-name">Ghost Recon Wildlands</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">25</span><span class="game-name">The Division 2</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">26</span><span class="game-name">Batman Arkham Knight</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">27</span><span class="game-name">Batman Arkham Collection</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">28</span><span class="game-name">Guardians of the Galaxy</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">29</span><span class="game-name">L.A. Noire</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">30</span><span class="game-name">Ghostwire Tokyo</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">31</span><span class="game-name">Saints Row (2022)</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">32</span><span class="game-name">Biomutant</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">33</span><span class="game-name">Sifu</span><span class="price-tag p99">₹99</span></div>
+  </div>
+</div>
+
+<!-- ══════════════ ASSASSIN'S CREED ══════════════ -->
+<div class="category">
+  <div class="cat-header" style="color:#a78bfa">
+    <span class="cat-icon">🗡️</span> Assassin's Creed Series
+    <span class="cat-count">9 Games</span>
+  </div>
+  <div class="game-list">
+    <div class="game-row"><span class="game-num">34</span><span class="game-name">Assassin's Creed Shadows <span class="game-badge badge-new">NEW</span></span><span class="price-tag p249">₹249</span></div>
+    <div class="game-row"><span class="game-num">35</span><span class="game-name">Assassin's Creed Mirage</span><span class="price-tag p169">₹169</span></div>
+    <div class="game-row"><span class="game-num">36</span><span class="game-name">Assassin's Creed Valhalla</span><span class="price-tag p199">₹199</span></div>
+    <div class="game-row"><span class="game-num">37</span><span class="game-name">Assassin's Creed Odyssey</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">38</span><span class="game-name">Assassin's Creed Origins</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">39</span><span class="game-name">Assassin's Creed Syndicate</span><span class="price-tag p49">₹49</span></div>
+    <div class="game-row"><span class="game-num">40</span><span class="game-name">Assassin's Creed Unity</span><span class="price-tag p49">₹49</span></div>
+    <div class="game-row"><span class="game-num">41</span><span class="game-name">Assassin's Creed IV Black Flag</span><span class="price-tag p49">₹49</span></div>
+    <div class="game-row"><span class="game-num">42</span><span class="game-name">Assassin's Creed Rogue Remastered</span><span class="price-tag p49">₹49</span></div>
+  </div>
+</div>
+
+<!-- ══════════════ PLAYSTATION EXCLUSIVES (PC) ══════════════ -->
+<div class="category">
+  <div class="cat-header" style="color:#00e676">
+    <span class="cat-icon">🕹️</span> PlayStation Exclusives on PC
+    <span class="cat-count">12 Games</span>
+  </div>
+  <div class="game-list">
+    <div class="game-row"><span class="game-num">43</span><span class="game-name">Marvel's Spider-Man Remastered <span class="game-badge badge-hot">HOT</span></span><span class="price-tag p249">₹249</span></div>
+    <div class="game-row"><span class="game-num">44</span><span class="game-name">Marvel's Spider-Man Miles Morales</span><span class="price-tag p199">₹199</span></div>
+    <div class="game-row"><span class="game-num">45</span><span class="game-name">Marvel's Spider-Man 2</span><span class="price-tag p249">₹249</span></div>
+    <div class="game-row"><span class="game-num">46</span><span class="game-name">God of War</span><span class="price-tag p199">₹199</span></div>
+    <div class="game-row"><span class="game-num">47</span><span class="game-name">God of War Ragnarök</span><span class="price-tag p249">₹249</span></div>
+    <div class="game-row"><span class="game-num">48</span><span class="game-name">The Last of Us Part I</span><span class="price-tag p249">₹249</span></div>
+    <div class="game-row"><span class="game-num">49</span><span class="game-name">The Last of Us Part II Remastered</span><span class="price-tag p249">₹249</span></div>
+    <div class="game-row"><span class="game-num">50</span><span class="game-name">Horizon Zero Dawn Complete Edition</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">51</span><span class="game-name">Horizon Forbidden West</span><span class="price-tag p249">₹249</span></div>
+    <div class="game-row"><span class="game-num">52</span><span class="game-name">Death Stranding Director's Cut</span><span class="price-tag p199">₹199</span></div>
+    <div class="game-row"><span class="game-num">53</span><span class="game-name">Days Gone</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">54</span><span class="game-name">Stellar Blade <span class="game-badge badge-new">NEW</span></span><span class="price-tag p249">₹249</span></div>
+  </div>
+</div>
+
+<!-- ══════════════ RACING ══════════════ -->
+<div class="category">
+  <div class="cat-header" style="color:#fbbf24">
+    <span class="cat-icon">🏎️</span> Racing Games
+    <span class="cat-count">17 Games</span>
+  </div>
+  <div class="game-list">
+    <div class="game-row"><span class="game-num">55</span><span class="game-name">Forza Horizon 6 <span class="edition">Standard Edition</span></span><span class="price-tag p169">₹169</span></div>
+    <div class="game-row"><span class="game-num">56</span><span class="game-name">Forza Horizon 6 <span class="edition">Premium Edition</span></span><span class="price-tag p249">₹249</span></div>
+    <div class="game-row"><span class="game-num">57</span><span class="game-name">Forza Horizon 5 <span class="edition">Standard Edition</span></span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">58</span><span class="game-name">Forza Horizon 5 <span class="edition">Premium Edition</span></span><span class="price-tag p199">₹199</span></div>
+    <div class="game-row"><span class="game-num">59</span><span class="game-name">Forza Horizon 4 <span class="edition">Standard Edition</span></span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">60</span><span class="game-name">Forza Horizon 4 <span class="edition">Ultimate Edition</span></span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">61</span><span class="game-name">Forza Motorsport (2023)</span><span class="price-tag p169">₹169</span></div>
+    <div class="game-row"><span class="game-num">62</span><span class="game-name">Need for Speed Unbound</span><span class="price-tag p169">₹169</span></div>
+    <div class="game-row"><span class="game-num">63</span><span class="game-name">Need for Speed Heat</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">64</span><span class="game-name">Need for Speed Hot Pursuit Remastered</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">65</span><span class="game-name">F1 25 <span class="game-badge badge-new">NEW</span></span><span class="price-tag p199">₹199</span></div>
+    <div class="game-row"><span class="game-num">66</span><span class="game-name">F1 24</span><span class="price-tag p169">₹169</span></div>
+    <div class="game-row"><span class="game-num">67</span><span class="game-name">F1 23</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">68</span><span class="game-name">Grid Legends</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">69</span><span class="game-name">DiRT Rally 2.0 GOTY</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">70</span><span class="game-name">Wreckfest</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">71</span><span class="game-name">WRC Generations</span><span class="price-tag p149">₹149</span></div>
+  </div>
+</div>
+
+<!-- ══════════════ SPORTS ══════════════ -->
+<div class="category">
+  <div class="cat-header" style="color:#34d399">
+    <span class="cat-icon">⚽</span> Sports Games
+    <span class="cat-count">14 Games</span>
+  </div>
+  <div class="game-list">
+    <div class="game-row"><span class="game-num">72</span><span class="game-name">Cricket 2026 <span class="game-badge badge-new">NEW</span></span><span class="price-tag p169">₹169</span></div>
+    <div class="game-row"><span class="game-num">73</span><span class="game-name">Cricket 25</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">74</span><span class="game-name">Cricket 24</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">75</span><span class="game-name">EA Sports FC 25</span><span class="price-tag p169">₹169</span></div>
+    <div class="game-row"><span class="game-num">76</span><span class="game-name">EA Sports FC 24</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">77</span><span class="game-name">FIFA 23</span><span class="price-tag p49">₹49</span></div>
+    <div class="game-row"><span class="game-num">78</span><span class="game-name">NBA 2K25</span><span class="price-tag p169">₹169</span></div>
+    <div class="game-row"><span class="game-num">79</span><span class="game-name">NBA 2K24</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">80</span><span class="game-name">WWE 2K25 <span class="game-badge badge-new">NEW</span></span><span class="price-tag p169">₹169</span></div>
+    <div class="game-row"><span class="game-num">81</span><span class="game-name">WWE 2K24</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">82</span><span class="game-name">UFC 5</span><span class="price-tag p169">₹169</span></div>
+    <div class="game-row"><span class="game-num">83</span><span class="game-name">PGA Tour 2K25</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">84</span><span class="game-name">Madden NFL 25</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">85</span><span class="game-name">TopSpin 2K25</span><span class="price-tag p149">₹149</span></div>
+  </div>
+</div>
+
+<!-- ══════════════ FPS / SHOOTER ══════════════ -->
+<div class="category">
+  <div class="cat-header" style="color:#f87171">
+    <span class="cat-icon">🔫</span> FPS / Shooter
+    <span class="cat-count">22 Games</span>
+  </div>
+  <div class="game-list">
+    <div class="game-row"><span class="game-num">86</span><span class="game-name">007 First Light <span class="game-badge badge-new">NEW</span></span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">87</span><span class="game-name">Call of Duty Black Ops 6 <span class="game-badge badge-hot">HOT</span></span><span class="price-tag p249">₹249</span></div>
+    <div class="game-row"><span class="game-num">88</span><span class="game-name">Call of Duty MW3 (2023)</span><span class="price-tag p199">₹199</span></div>
+    <div class="game-row"><span class="game-num">89</span><span class="game-name">Call of Duty MW2 (2022)</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">90</span><span class="game-name">Call of Duty Vanguard</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">91</span><span class="game-name">Battlefield 2042</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">92</span><span class="game-name">Battlefield 1 Revolution</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">93</span><span class="game-name">Battlefield V</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">94</span><span class="game-name">DOOM Eternal <span class="game-badge badge-hot">HOT</span></span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">95</span><span class="game-name">DOOM Eternal + Ancient Gods Bundle</span><span class="price-tag p199">₹199</span></div>
+    <div class="game-row"><span class="game-num">96</span><span class="game-name">DOOM The Dark Ages <span class="game-badge badge-new">NEW</span></span><span class="price-tag p199">₹199</span></div>
+    <div class="game-row"><span class="game-num">97</span><span class="game-name">Halo Infinite</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">98</span><span class="game-name">Halo Master Chief Collection</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">99</span><span class="game-name">Titanfall 2</span><span class="price-tag p49">₹49</span></div>
+    <div class="game-row"><span class="game-num">100</span><span class="game-name">Metro Exodus Enhanced Edition</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">101</span><span class="game-name">Metro Exodus Gold Edition</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">102</span><span class="game-name">Borderlands 3 Super Deluxe</span><span class="price-tag p199">₹199</span></div>
+    <div class="game-row"><span class="game-num">103</span><span class="game-name">Tiny Tina's Wonderlands</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">104</span><span class="game-name">Wolfenstein II The New Colossus</span><span class="price-tag p49">₹49</span></div>
+    <div class="game-row"><span class="game-num">105</span><span class="game-name">Prey (2017)</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">106</span><span class="game-name">Deathloop</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">107</span><span class="game-name">Dishonored 2</span><span class="price-tag p49">₹49</span></div>
+  </div>
+</div>
+
+<!-- ══════════════ RPG ══════════════ -->
+<div class="category">
+  <div class="cat-header" style="color:#ffd700">
+    <span class="cat-icon">⚔️</span> RPG / Action RPG
+    <span class="cat-count">28 Games</span>
+  </div>
+  <div class="game-list">
+    <div class="game-row"><span class="game-num">108</span><span class="game-name">Baldur's Gate 3 <span class="game-badge badge-top">TOP</span></span><span class="price-tag p249">₹249</span></div>
+    <div class="game-row"><span class="game-num">109</span><span class="game-name">Elden Ring <span class="game-badge badge-hot">HOT</span></span><span class="price-tag p249">₹249</span></div>
+    <div class="game-row"><span class="game-num">110</span><span class="game-name">Elden Ring + Shadow of the Erdtree <span class="edition">Shadow Edition</span></span><span class="price-tag p299">₹299</span></div>
+    <div class="game-row"><span class="game-num">111</span><span class="game-name">Dark Souls III <span class="edition">Fire Fades Edition</span></span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">112</span><span class="game-name">Dark Souls Remastered</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">113</span><span class="game-name">Sekiro Shadows Die Twice <span class="game-badge badge-top">TOP</span></span><span class="price-tag p199">₹199</span></div>
+    <div class="game-row"><span class="game-num">114</span><span class="game-name">Black Myth Wukong <span class="game-badge badge-hot">HOT</span></span><span class="price-tag p249">₹249</span></div>
+    <div class="game-row"><span class="game-num">115</span><span class="game-name">Starfield</span><span class="price-tag p199">₹199</span></div>
+    <div class="game-row"><span class="game-num">116</span><span class="game-name">Starfield Premium Edition</span><span class="price-tag p249">₹249</span></div>
+    <div class="game-row"><span class="game-num">117</span><span class="game-name">Fallout 4 Game of the Year</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">118</span><span class="game-name">Fallout 76</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">119</span><span class="game-name">Skyrim Anniversary Edition</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">120</span><span class="game-name">The Witcher 3 Complete Edition</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">121</span><span class="game-name">Dragon's Dogma 2</span><span class="price-tag p199">₹199</span></div>
+    <div class="game-row"><span class="game-num">122</span><span class="game-name">Monster Hunter Wilds <span class="game-badge badge-new">NEW</span></span><span class="price-tag p249">₹249</span></div>
+    <div class="game-row"><span class="game-num">123</span><span class="game-name">Monster Hunter World Iceborne <span class="edition">Master Edition</span></span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">124</span><span class="game-name">Monster Hunter Rise + Sunbreak</span><span class="price-tag p199">₹199</span></div>
+    <div class="game-row"><span class="game-num">125</span><span class="game-name">Tales of Arise</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">126</span><span class="game-name">Persona 5 Royal</span><span class="price-tag p199">₹199</span></div>
+    <div class="game-row"><span class="game-num">127</span><span class="game-name">Persona 4 Golden</span><span class="price-tag p49">₹49</span></div>
+    <div class="game-row"><span class="game-num">128</span><span class="game-name">Final Fantasy XVI</span><span class="price-tag p249">₹249</span></div>
+    <div class="game-row"><span class="game-num">129</span><span class="game-name">Final Fantasy VII Rebirth</span><span class="price-tag p249">₹249</span></div>
+    <div class="game-row"><span class="game-num">130</span><span class="game-name">Final Fantasy VII Remake Intergrade</span><span class="price-tag p199">₹199</span></div>
+    <div class="game-row"><span class="game-num">131</span><span class="game-name">NieR Automata</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">132</span><span class="game-name">Diablo 4 <span class="game-badge badge-hot">HOT</span></span><span class="price-tag p249">₹249</span></div>
+    <div class="game-row"><span class="game-num">133</span><span class="game-name">Diablo 4 + Vessel of Hatred <span class="edition">Ultimate Edition</span></span><span class="price-tag p299">₹299</span></div>
+    <div class="game-row"><span class="game-num">134</span><span class="game-name">Nioh 2 Complete Edition</span><span class="price-tag p199">₹199</span></div>
+    <div class="game-row"><span class="game-num">135</span><span class="game-name">Divinity Original Sin 2 Definitive</span><span class="price-tag p99">₹99</span></div>
+  </div>
+</div>
+
+<!-- ══════════════ SURVIVAL / HORROR ══════════════ -->
+<div class="category">
+  <div class="cat-header" style="color:#fb923c">
+    <span class="cat-icon">🧟</span> Survival / Horror
+    <span class="cat-count">18 Games</span>
+  </div>
+  <div class="game-list">
+    <div class="game-row"><span class="game-num">136</span><span class="game-name">Resident Evil 4 Remake <span class="game-badge badge-hot">HOT</span></span><span class="price-tag p199">₹199</span></div>
+    <div class="game-row"><span class="game-num">137</span><span class="game-name">Resident Evil 4 <span class="edition">Deluxe Edition</span></span><span class="price-tag p249">₹249</span></div>
+    <div class="game-row"><span class="game-num">138</span><span class="game-name">Resident Evil Village Gold Edition</span><span class="price-tag p199">₹199</span></div>
+    <div class="game-row"><span class="game-num">139</span><span class="game-name">Resident Evil 3 Remake</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">140</span><span class="game-name">Resident Evil 2 Remake</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">141</span><span class="game-name">Silent Hill 2 Remake</span><span class="price-tag p249">₹249</span></div>
+    <div class="game-row"><span class="game-num">142</span><span class="game-name">Alan Wake 2</span><span class="price-tag p199">₹199</span></div>
+    <div class="game-row"><span class="game-num">143</span><span class="game-name">Alan Wake Remastered</span><span class="price-tag p49">₹49</span></div>
+    <div class="game-row"><span class="game-num">144</span><span class="game-name">Control Ultimate Edition</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">145</span><span class="game-name">Dead Island 2</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">146</span><span class="game-name">Dying Light 2 Reloaded Edition</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">147</span><span class="game-name">Sons of the Forest</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">148</span><span class="game-name">The Forest</span><span class="price-tag p49">₹49</span></div>
+    <div class="game-row"><span class="game-num">149</span><span class="game-name">7 Days to Die</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">150</span><span class="game-name">Rust</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">151</span><span class="game-name">DayZ</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">152</span><span class="game-name">A Plague Tale Requiem</span><span class="price-tag p199">₹199</span></div>
+    <div class="game-row"><span class="game-num">153</span><span class="game-name">A Plague Tale Innocence</span><span class="price-tag p49">₹49</span></div>
+  </div>
+</div>
+
+<!-- ══════════════ STRATEGY ══════════════ -->
+<div class="category">
+  <div class="cat-header" style="color:#38bdf8">
+    <span class="cat-icon">♟️</span> Strategy / Simulation
+    <span class="cat-count">20 Games</span>
+  </div>
+  <div class="game-list">
+    <div class="game-row"><span class="game-num">154</span><span class="game-name">Age of Empires IV Anniversary Ed.</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">155</span><span class="game-name">Age of Empires Definitive Collection</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">156</span><span class="game-name">Civilization VII <span class="game-badge badge-new">NEW</span></span><span class="price-tag p249">₹249</span></div>
+    <div class="game-row"><span class="game-num">157</span><span class="game-name">Civilization VI Anthology</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">158</span><span class="game-name">Total War Warhammer 3</span><span class="price-tag p199">₹199</span></div>
+    <div class="game-row"><span class="game-num">159</span><span class="game-name">Total War Three Kingdoms</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">160</span><span class="game-name">Company of Heroes 3</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">161</span><span class="game-name">Hades <span class="game-badge badge-top">TOP</span></span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">162</span><span class="game-name">Hades II</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">163</span><span class="game-name">Frostpunk 2</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">164</span><span class="game-name">Cities Skylines 2</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">165</span><span class="game-name">Planet Coaster 2</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">166</span><span class="game-name">Planet Zoo</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">167</span><span class="game-name">Satisfactory</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">168</span><span class="game-name">Factorio</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">169</span><span class="game-name">Microsoft Flight Simulator 2024</span><span class="price-tag p249">₹249</span></div>
+    <div class="game-row"><span class="game-num">170</span><span class="game-name">Farming Simulator 25</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">171</span><span class="game-name">Euro Truck Simulator 2</span><span class="price-tag p49">₹49</span></div>
+    <div class="game-row"><span class="game-num">172</span><span class="game-name">House Flipper 2</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">173</span><span class="game-name">PowerWash Simulator</span><span class="price-tag p99">₹99</span></div>
+  </div>
+</div>
+
+<!-- ══════════════ ACTION / HACK & SLASH ══════════════ -->
+<div class="category">
+  <div class="cat-header" style="color:#e879f9">
+    <span class="cat-icon">🥷</span> Action / Hack & Slash
+    <span class="cat-count">10 Games</span>
+  </div>
+  <div class="game-list">
+    <div class="game-row"><span class="game-num">174</span><span class="game-name">Devil May Cry 5 Special Edition</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">175</span><span class="game-name">Wo Long Fallen Dynasty</span><span class="price-tag p199">₹199</span></div>
+    <div class="game-row"><span class="game-num">176</span><span class="game-name">Prince of Persia The Lost Crown</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">177</span><span class="game-name">Ghostrunner 2</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">178</span><span class="game-name">Lies of P</span><span class="price-tag p199">₹199</span></div>
+    <div class="game-row"><span class="game-num">179</span><span class="game-name">Atomic Heart</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">180</span><span class="game-name">Atomic Heart Premium Edition</span><span class="price-tag p199">₹199</span></div>
+    <div class="game-row"><span class="game-num">181</span><span class="game-name">Bayonetta 3</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">182</span><span class="game-name">Hi-Fi Rush</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">183</span><span class="game-name">Quantum Break</span><span class="price-tag p49">₹49</span></div>
+  </div>
+</div>
+
+<!-- ══════════════ PLATFORMER / INDIE ══════════════ -->
+<div class="category">
+  <div class="cat-header" style="color:#4ade80">
+    <span class="cat-icon">🎮</span> Platformer / Indie
+    <span class="cat-count">16 Games</span>
+  </div>
+  <div class="game-list">
+    <div class="game-row"><span class="game-num">184</span><span class="game-name">Ori Will of the Wisps</span><span class="price-tag p49">₹49</span></div>
+    <div class="game-row"><span class="game-num">185</span><span class="game-name">Ori Blind Forest Definitive Edition</span><span class="price-tag p49">₹49</span></div>
+    <div class="game-row"><span class="game-num">186</span><span class="game-name">Cuphead + The Delicious Last Course</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">187</span><span class="game-name">Hollow Knight <span class="game-badge badge-top">TOP</span></span><span class="price-tag p49">₹49</span></div>
+    <div class="game-row"><span class="game-num">188</span><span class="game-name">Celeste</span><span class="price-tag p49">₹49</span></div>
+    <div class="game-row"><span class="game-num">189</span><span class="game-name">Crash Bandicoot N. Sane Trilogy</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">190</span><span class="game-name">Crash Bandicoot 4 It's About Time</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">191</span><span class="game-name">Spyro Reignited Trilogy</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">192</span><span class="game-name">Psychonauts 2</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">193</span><span class="game-name">Minecraft Java + Bedrock Edition</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">194</span><span class="game-name">Stardew Valley</span><span class="price-tag p49">₹49</span></div>
+    <div class="game-row"><span class="game-num">195</span><span class="game-name">Undertale</span><span class="price-tag p49">₹49</span></div>
+    <div class="game-row"><span class="game-num">196</span><span class="game-name">Shovel Knight Treasure Trove</span><span class="price-tag p49">₹49</span></div>
+    <div class="game-row"><span class="game-num">197</span><span class="game-name">Subnautica</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">198</span><span class="game-name">No Man's Sky</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">199</span><span class="game-name">Valheim</span><span class="price-tag p99">₹99</span></div>
+  </div>
+</div>
+
+<!-- ══════════════ CO-OP / MULTIPLAYER ══════════════ -->
+<div class="category">
+  <div class="cat-header" style="color:#fb7185">
+    <span class="cat-icon">👥</span> Co-op / Multiplayer Fun
+    <span class="cat-count">13 Games</span>
+  </div>
+  <div class="game-list">
+    <div class="game-row"><span class="game-num">200</span><span class="game-name">It Takes Two <span class="game-badge badge-top">TOP</span></span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">201</span><span class="game-name">A Way Out</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">202</span><span class="game-name">Split Fiction <span class="game-badge badge-new">NEW</span></span><span class="price-tag p169">₹169</span></div>
+    <div class="game-row"><span class="game-num">203</span><span class="game-name">Overcooked! All You Can Eat</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">204</span><span class="game-name">Human Fall Flat</span><span class="price-tag p49">₹49</span></div>
+    <div class="game-row"><span class="game-num">205</span><span class="game-name">Among Us</span><span class="price-tag p49">₹49</span></div>
+    <div class="game-row"><span class="game-num">206</span><span class="game-name">Pummel Party</span><span class="price-tag p49">₹49</span></div>
+    <div class="game-row"><span class="game-num">207</span><span class="game-name">Gang Beasts</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">208</span><span class="game-name">Back 4 Blood</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">209</span><span class="game-name">Payday 3</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">210</span><span class="game-name">Sea of Thieves</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">211</span><span class="game-name">Deep Rock Galactic</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">212</span><span class="game-name">Minecraft Dungeons</span><span class="price-tag p99">₹99</span></div>
+  </div>
+</div>
+
+<!-- ══════════════ ADVENTURE / NARRATIVE ══════════════ -->
+<div class="category">
+  <div class="cat-header" style="color:#67e8f9">
+    <span class="cat-icon">📖</span> Adventure / Story Rich
+    <span class="cat-count">11 Games</span>
+  </div>
+  <div class="game-list">
+    <div class="game-row"><span class="game-num">213</span><span class="game-name">Disco Elysium Final Cut</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">214</span><span class="game-name">Life is Strange True Colors</span><span class="price-tag p149">₹149</span></div>
+    <div class="game-row"><span class="game-num">215</span><span class="game-name">Life is Strange 2</span><span class="price-tag p49">₹49</span></div>
+    <div class="game-row"><span class="game-num">216</span><span class="game-name">Detroit Become Human</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">217</span><span class="game-name">Heavy Rain</span><span class="price-tag p49">₹49</span></div>
+    <div class="game-row"><span class="game-num">218</span><span class="game-name">Beyond Two Souls</span><span class="price-tag p49">₹49</span></div>
+    <div class="game-row"><span class="game-num">219</span><span class="game-name">Sherlock Holmes Chapter One</span><span class="price-tag p99">₹99</span></div>
+    <div class="game-row"><span class="game-num">220</span><span class="game-name">Outer Wilds</span><span class="price-tag p49">₹49</span></div>
+    <div class="game-row"><span class="game-num">221</span><span class="game-name">The Forgotten City</span><span class="price-tag p49">₹49</span></div>
+    <div class="game-row"><span class="game-num">222</span><span class="game-name">Firewatch</span><span class="price-tag p49">₹49</span></div>
+    <div class="game-row"><span class="game-num">223</span><span class="game-name">What Remains of Edith Finch</span><span class="price-tag p49">₹49</span></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-note">
+    ✅ All games are <strong>100% working</strong> on PC<br>
+    ⚡ Order on WhatsApp & get <strong>instant delivery</strong><br>
+    🔄 Any game not listed? <strong>Just ask — we'll arrange it!</strong><br>
+    💬 DM us the game number or name to order
+  </div>
+  <div class="order-cta">📲 WhatsApp to Order Now</div>
+  <div style="margin-top: 14px; font-size: 0.65rem; color: #475569;">
+    Updated June 2025 · Prices subject to change · 220+ Games Listed
+  </div>
+</div>
+
+</div><!-- /content -->
+</body>
+</html>
